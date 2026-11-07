@@ -10,8 +10,6 @@ namespace FOP_Final_Proj
     {
         static void Main(string[] args)
         {
-            static void Main(string[] args)
-            {
                 List<string> usersList = new List<string>();
                 List<string> productsList = new List<string>();
                 List<string> ordersList = new List<string>();
@@ -46,17 +44,16 @@ namespace FOP_Final_Proj
                             break;
                     }
                 }
-            }
+        }
+        public static void GetInitialValues(List<string> usersList)
+        {
+            usersList.Add("yourname_admin|yourname_password|Admin|Active");
+            usersList.Add("jayson_warehouse|1234|Warehouse|Active");
+            usersList.Add("jenny_warehouse|1234|Warehouse|Active");
+            usersList.Add("jayson_user|1234|User|Active");
+            usersList.Add("jenny_user|1234|User|Active");
+            usersList.Add("mary_user|1234|User|Active");
 
-            public static void GetInitialValues(List<string> usersList)
-            {
-                usersList.Add("yourname_admin|yourname_password|Admin|Active");
-                usersList.Add("jayson_warehouse|1234|Warehouse|Active");
-                usersList.Add("jenny_warehouse|1234|Warehouse|Active");
-                usersList.Add("jayson_user|1234|User|Active");
-                usersList.Add("jenny_user|1234|User|Active");
-                usersList.Add("mary_user|1234|User|Active");
-            }
         }
     }
 }
