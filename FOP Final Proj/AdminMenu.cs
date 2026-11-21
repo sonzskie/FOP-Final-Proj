@@ -55,10 +55,10 @@ namespace FOP_Final_Proj
                         UserManager.DisplayUsers(usersList, "Active");
                         break;
                     case 7:
-                        //DisplayProducts
+                        ProductManager.DisplayProducts(productsList);
                         break;
                     case 8:
-                        //DisplayOrders
+                        OrderManager.DisplayOrders(ordersList, "");
                         break;
                     case 9:
                         keepRunning = false;

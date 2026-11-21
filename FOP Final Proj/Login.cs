@@ -8,28 +8,48 @@ namespace FOP_Final_Proj
 {
     public static class Authentication
     {
+        const int MAX_ATTEMPTS = 3;
+
         public static string Login(List<string> usersList, string role)
         {
-            Console.Write("Please enter your username: ");
-            var username = Console.ReadLine();
+            Console.WriteLine("(Enter 0 to go back)");
 
-            Console.Write("Please enter your password: ");
-            var password = Console.ReadLine();
-
-            foreach (var user in usersList)
+            for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++)
             {
-                var parts = user.Split('|');
+                Console.Write("Please enter your username: ");
+                var username = Console.ReadLine();
 
-                if (parts[0].ToLower() == username.Trim().ToLower() &&
-                    parts[1] == password &&
-                    parts[2] == role &&
-                    parts[3] == "Active")
+                if (username.Trim() == "0")
+                    return "";   
+
+                Console.Write("Please enter your password: ");
+                var password = Console.ReadLine();
+
+                if (password.Trim() == "0")
+                    return "";   
+
+                foreach (var user in usersList)
                 {
-                    return parts[0];
+                    var parts = user.Split('|');
+
+                    if (parts[0].ToLower() == username.Trim().ToLower() &&
+                        parts[1] == password &&
+                        parts[2] == role &&
+                        parts[3] == "Active")
+                    {
+                        return parts[0];   
+                    }
                 }
+
+                var attemptsLeft = MAX_ATTEMPTS - attempt;
+
+                if (attemptsLeft > 0)
+                    Console.WriteLine($"Invalid username or password. Attempts left: {attemptsLeft}");
+                else
+                    Console.WriteLine("Invalid username or password.");
             }
 
-            Console.WriteLine("Invalid username or password.");
+            Console.WriteLine("Too many failed attempts. Returning to the role menu.");
             return "";
         }
     }

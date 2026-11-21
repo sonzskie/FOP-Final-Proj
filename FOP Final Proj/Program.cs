@@ -18,7 +18,8 @@ namespace FOP_Final_Proj
                 var message = "\nPlease select a user role to login:" +
                               "\n1 Admin" +
                               "\n2 Warehouse" +
-                              "\n3 User";
+                              "\n3 User" +
+                              "\n0 Exit";
 
                 Console.WriteLine(message);
 
@@ -26,14 +27,17 @@ namespace FOP_Final_Proj
 
                 switch (userChoice)
                 {
+                    case 0:
+                        Console.WriteLine("Exiting the program.");
+                        return; 
                     case 1:
                         AdminMenu.Show(usersList, productsList, ordersList);
                         break;
                     case 2:
-                        //WarehouseMenu.Show(usersList, productsList);
+                        WarehouseMenu.Show(usersList, productsList);
                         break;
                     case 3:
-                        //UserMenu.Show(usersList, productsList, ordersList);
+                        UserMenu.Show(usersList, productsList, ordersList);
                         break;
                     default:
                         Console.WriteLine("Invalid input");
