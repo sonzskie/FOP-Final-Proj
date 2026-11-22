@@ -35,6 +35,8 @@ namespace FOP_Final_Proj
 
                 Console.Write("Please select an account: ");
                 var choice = Convert.ToInt32(Console.ReadLine());
+                 Console.WriteLine();
+
 
                 string target;
 
@@ -88,6 +90,8 @@ namespace FOP_Final_Proj
 
                 Console.Write("Please select a user to inactivate: ");
                 var choice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+
 
                 if (choice < 1 || choice > activeUsers.Count)
                 {
@@ -112,6 +116,8 @@ namespace FOP_Final_Proj
             {
                 Console.Write("Enter role (1 Admin, 2 Warehouse, 3 User): ");
                 var roleChoice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+
 
                 string role;
 
@@ -129,6 +135,8 @@ namespace FOP_Final_Proj
 
                 Console.Write("Enter username: ");
                 var username = Console.ReadLine().Trim();
+                Console.WriteLine();
+
 
                 foreach (var user in usersList)
                 {
@@ -141,6 +149,8 @@ namespace FOP_Final_Proj
 
                 Console.Write("Enter password: ");
                 var password = Console.ReadLine();
+                Console.WriteLine();
+
 
                 usersList.Add($"{username}|{password}|{role}|Active");
 

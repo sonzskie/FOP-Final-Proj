@@ -19,12 +19,14 @@ namespace FOP_Final_Proj
                 if (details[2] == "True")
                 {
                     Console.WriteLine($"{i + 1}. Product Name: {details[0]}");
-                    Console.WriteLine($"   Quantity: {details[1]}");
+                    Console.WriteLine($"Quantity: {details[1]}");
+                    Console.WriteLine();
                 }
             }
 
             Console.Write("\nPlease enter the number of the product you want to order: ");
             int productChoice = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
 
             switch (productChoice)
             {
@@ -49,6 +51,7 @@ namespace FOP_Final_Proj
 
             Console.Write("Please enter the quantity of the product you want to order: ");
             int quantity = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
 
             int availableQuantity = Convert.ToInt32(product[1]);
 

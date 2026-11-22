@@ -21,6 +21,7 @@ namespace FOP_Final_Proj
                 {
                     Console.Write("Please enter the number of products you want to add: ");
                     numProduct = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine();
 
                     switch (numProduct)
                     {
@@ -36,10 +37,12 @@ namespace FOP_Final_Proj
                 }
                 catch (FormatException)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("Invalid input. Please enter a number.");
                 }
                 catch (OverflowException)
                 {
+                    Console.WriteLine();
                     Console.WriteLine("That number is too big.");
                 }
             }
@@ -68,6 +71,7 @@ namespace FOP_Final_Proj
                     {
                         Console.Write($"{i}. Please enter the quantity of the product : ");
                         quantity = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
 
                         if (quantity <= 0)
                             Console.WriteLine("Quantity must be greater than zero.");
@@ -76,10 +80,12 @@ namespace FOP_Final_Proj
                     }
                     catch (FormatException)
                     {
+                        Console.WriteLine();
                         Console.WriteLine("Invalid input. Please enter a number.");
                     }
                     catch (OverflowException)
                     {
+                        Console.WriteLine();
                         Console.WriteLine("That number is too big.");
                     }
                 }

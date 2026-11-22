@@ -32,7 +32,10 @@ namespace FOP_Final_Proj
 
                 Console.WriteLine(message);
 
+                Console.WriteLine();
+                Console.Write("Please enter a number: ");
                 var userChoice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
 
                 switch (userChoice)
                 {
@@ -61,6 +64,10 @@ namespace FOP_Final_Proj
                         OrderManager.DisplayOrders(ordersList, "");
                         break;
                     case 9:
+                        Console.WriteLine("Successfully logged out.");
+                        Console.Write("Press any key to continue...");
+                        Console.ReadKey();
+                        Console.Clear();
                         keepRunning = false;
                         break;
                     default:

@@ -23,13 +23,16 @@ namespace FOP_Final_Proj
 
                 Console.WriteLine(message);
 
+                Console.WriteLine();
+                Console.Write("Please enter a number: ");
                 var userChoice = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
 
                 switch (userChoice)
                 {
                     case 0:
                         Console.WriteLine("Exiting the program.");
-                        return; 
+                        return;
                     case 1:
                         AdminMenu.Show(usersList, productsList, ordersList);
                         break;
