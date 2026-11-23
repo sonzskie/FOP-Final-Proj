@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace FOP_Final_Proj
 {
@@ -45,8 +46,9 @@ namespace FOP_Final_Proj
                     Console.WriteLine();
                     Console.WriteLine("That number is too big.");
                 }
+              
             }
-
+           
             for (int i = 1; i <= numProduct; i++)
             {
                 
@@ -69,12 +71,20 @@ namespace FOP_Final_Proj
                 {
                     try
                     {
+                        Console.WriteLine("Please enter 1-10");
                         Console.Write($"{i}. Please enter the quantity of the product : ");
                         quantity = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine();
-
+                        
                         if (quantity <= 0)
+                        {
                             Console.WriteLine("Quantity must be greater than zero.");
+                        }
+                        else if (quantity >=10)
+                        {
+                            Console.WriteLine("PLease enter valid input");
+                        }
+
                         else
                             isQuantityValid = true;
                     }
@@ -93,9 +103,14 @@ namespace FOP_Final_Proj
                 var date = DateTime.Now.ToString("M/d/yyyy h:mm tt");
 
                 productsList.Add($"{name}|{quantity}|True|{date}|{warehouse}");
+                if (numProduct < 1 && quantity < 1)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number of products and quantity.");
+                }
             }
 
             Console.WriteLine("All products have been successfully created.");
+            
         }
 
         public static void DisplayProducts(List<string> productsList)

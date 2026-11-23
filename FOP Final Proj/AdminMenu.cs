@@ -19,7 +19,7 @@ namespace FOP_Final_Proj
 
             while (keepRunning)
             {
-                var message = "\nPlease select an option:" +
+                Console.WriteLine("\nPlease select an option:" +
                               "\n1. Update Password" +
                               "\n2. Inactivate User" +
                               "\n3. Add User" +
@@ -28,9 +28,19 @@ namespace FOP_Final_Proj
                               "\n6. Display Active Users" +
                               "\n7. Display Products" +
                               "\n8. Display Orders" +
-                              "\n9. Logout";
+                              "\n9. Logout");
+                var message = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine(message);
+
+                if (message < 1)
+                {
+                    Console.WriteLine("Please enter a valid option.");
+                }
+                else if (message > 9)
+                {
+                    Console.WriteLine("Please enter a valid option.");
+                }
+
 
                 Console.WriteLine();
                 Console.Write("Please enter a number: ");
