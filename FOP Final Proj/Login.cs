@@ -23,11 +23,28 @@ namespace FOP_Final_Proj
                     return "";
 
                 Console.Write("Please enter your password: ");
-                var password = Console.ReadLine();
+                var password = Console.ReadLine().Trim();
 
                 if (password.Trim() == "0")
                     return "";
 
+                if (int.TryParse(password, out int message))
+                {
+                    if (message < 0)
+                    {
+                        Console.WriteLine("Please enter a valid option.");
+
+                        var attemptsLeft = MAX_ATTEMPTS - attempt;
+
+                        if (attemptsLeft > 0)
+                            Console.WriteLine($"Attempts left: {attemptsLeft}");
+
+                        Console.WriteLine();
+                        continue;
+                    }
+                }
+
+               
                 foreach (var user in usersList)
                 {
                     var parts = user.Split('|');
@@ -37,17 +54,20 @@ namespace FOP_Final_Proj
                         parts[2] == role &&
                         parts[3] == "Active")
                     {
+                        Console.Clear();
                         return parts[0];
                     }
                 }
 
                 Console.WriteLine();
-                var attemptsLeft = MAX_ATTEMPTS - attempt;
 
-                if (attemptsLeft > 0)
-                    Console.WriteLine($"Invalid username or password. Attempts left: {attemptsLeft}");
+                var remainingAttempts = MAX_ATTEMPTS - attempt;
+
+                if (remainingAttempts > 0)
+                    Console.WriteLine($"Invalid username or password. Attempts left: {remainingAttempts}");
                 else
                     Console.WriteLine("Invalid username or password.");
+
                 Console.WriteLine();
             }
 
