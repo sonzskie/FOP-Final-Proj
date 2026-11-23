@@ -28,17 +28,18 @@ namespace FOP_Final_Proj
             int productChoice = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
 
-            if (productChoice <1)
-            {
-                Console.WriteLine("Please enter a valid option.");
-            }
-
             switch (productChoice)
             {
                 case 0:
                     return;  
                 default:
-                    if (productChoice < 1 || productChoice > productsList.Count)
+                    if (productChoice < 0)
+                    {
+                        Console.WriteLine("Invalid input.");
+                        return;
+                    }
+
+                    if (productChoice > productsList.Count)
                     {
                         Console.WriteLine("Invalid product number.");
                         return;
@@ -59,14 +60,16 @@ namespace FOP_Final_Proj
             Console.WriteLine();
 
             int availableQuantity = Convert.ToInt32(product[1]);
-            if (availableQuantity <1 && quantity <1)
+
+            if (quantity < 0)
             {
-                Console.WriteLine("Please input valid option");
+                Console.WriteLine("Invalid input.");
+                return;
             }
 
-            if (quantity <= 0)
+            if (quantity == -1)
             {
-                Console.WriteLine("Quantity must be greater than zero.");
+                Console.WriteLine("Quantity must be greater than or equal to zero.");
                 return;
             }
 
@@ -75,10 +78,7 @@ namespace FOP_Final_Proj
                 Console.WriteLine("Insufficient product quantity.");
                 return;
             }
-            else if (availableQuantity < quantity)
-            {
-                Console.WriteLine("Not available quantity");
-            }
+
             int remainingQuantity = availableQuantity - quantity;
 
             productsList[productChoice - 1] =

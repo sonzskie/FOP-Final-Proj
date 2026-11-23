@@ -29,18 +29,6 @@ namespace FOP_Final_Proj
                               "\n7. Display Products" +
                               "\n8. Display Orders" +
                               "\n9. Logout");
-                var message = Convert.ToInt32(Console.ReadLine());
-
-
-                if (message < 1)
-                {
-                    Console.WriteLine("Please enter a valid option.");
-                }
-                else if (message > 9)
-                {
-                    Console.WriteLine("Please enter a valid option.");
-                }
-
 
                 Console.WriteLine();
                 Console.Write("Please enter a number: ");

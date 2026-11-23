@@ -27,10 +27,10 @@ namespace FOP_Final_Proj
                     switch (numProduct)
                     {
                         case 0:
-                            return;  
+                            return;
                         default:
                             if (numProduct < 0)
-                                Console.WriteLine("Please enter a number greater than zero.");
+                                Console.WriteLine("Invalid input.");
                             else
                                 isValid = true;
                             break;
@@ -46,23 +46,25 @@ namespace FOP_Final_Proj
                     Console.WriteLine();
                     Console.WriteLine("That number is too big.");
                 }
-              
             }
-           
+
             for (int i = 1; i <= numProduct; i++)
             {
-                
-                string name;
+                string name = "";
+                var isNameValid = false;
 
-                do
+                while (!isNameValid)
                 {
                     Console.Write($"{i}. Please enter the name of the product : ");
                     name = Console.ReadLine().Trim();
 
                     if (name == "" || name.Contains("|"))
                         Console.WriteLine("The name cannot be empty or contain the | character.");
+                    else if (ProductExists(productsList, name))
+                        Console.WriteLine("Invalid product. Product already exists.");
+                    else
+                        isNameValid = true;
                 }
-                while (name == "" || name.Contains("|"));
 
                 int quantity = 0;
                 var isQuantityValid = false;
@@ -71,20 +73,14 @@ namespace FOP_Final_Proj
                 {
                     try
                     {
-                        Console.WriteLine("Please enter 1-10");
                         Console.Write($"{i}. Please enter the quantity of the product : ");
                         quantity = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine();
-                        
-                        if (quantity <= 0)
-                        {
-                            Console.WriteLine("Quantity must be greater than zero.");
-                        }
-                        else if (quantity >=10)
-                        {
-                            Console.WriteLine("PLease enter valid input");
-                        }
 
+                        if (quantity < 0)
+                            Console.WriteLine("Invalid input.");
+                        else if (quantity == -1)
+                            Console.WriteLine("Quantity must be greater than or equal to zero.");
                         else
                             isQuantityValid = true;
                     }
@@ -103,14 +99,20 @@ namespace FOP_Final_Proj
                 var date = DateTime.Now.ToString("M/d/yyyy h:mm tt");
 
                 productsList.Add($"{name}|{quantity}|True|{date}|{warehouse}");
-                if (numProduct < 1 && quantity < 1)
-                {
-                    Console.WriteLine("Invalid input. Please enter a valid number of products and quantity.");
-                }
             }
 
             Console.WriteLine("All products have been successfully created.");
-            
+        }
+
+        public static bool ProductExists(List<string> productsList, string name)
+        {
+            foreach (var product in productsList)
+            {
+                if (product.Split('|')[0].ToLower() == name.ToLower())
+                    return true;
+            }
+
+            return false;
         }
 
         public static void DisplayProducts(List<string> productsList)
