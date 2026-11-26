@@ -8,7 +8,7 @@ namespace FOP_Final_Proj
 {
     public static class AdminMenu
     {
-        public static void Show(List<string> usersList, List<string> productsList, List<string> ordersList)
+        public static void Show(List<User> usersList, List<Product> productsList, List<Order> ordersList)
         {
             var admin = Authentication.Login(usersList, "Admin");
 
@@ -38,22 +38,22 @@ namespace FOP_Final_Proj
                 switch (userChoice)
                 {
                     case 1:
-                        UserManager.UpdatePassword(usersList, admin);
+                        AdminManager.UpdatePassword(usersList, admin);
                         break;
                     case 2:
-                        UserManager.InactivateUser(usersList, admin);
+                        AdminManager.InactivateUser(usersList, admin);
                         break;
                     case 3:
-                        UserManager.AddUser(usersList);
+                        AdminManager.AddUser(usersList);
                         break;
                     case 4:
-                        UserManager.DisplayUsers(usersList, "All");
+                        AdminManager.DisplayUsers(usersList, "All");
                         break;
                     case 5:
-                        UserManager.DisplayUsers(usersList, "Inactive");
+                        AdminManager.DisplayUsers(usersList, "Inactive");
                         break;
                     case 6:
-                        UserManager.DisplayUsers(usersList, "Active");
+                        AdminManager.DisplayUsers(usersList, "Active");
                         break;
                     case 7:
                         ProductManager.DisplayProducts(productsList);

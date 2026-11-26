@@ -6,24 +6,22 @@ using System.Threading.Tasks;
 
 namespace FOP_Final_Proj
 {
-    internal class UserManager
+    internal class AdminManager
     {
-        public static List<string> GetActiveUsernames(List<string> usersList, string exclude)
+        public static List<string> GetActiveUsernames(List<User> usersList, string exclude)
         {
             List<string> names = new List<string>();
 
             foreach (var user in usersList)
             {
-                var parts = user.Split('|');
-
-                if (parts[3] == "Active" && parts[0] != exclude)
-                    names.Add(parts[0]);
+                if (user.Status == "Active" && user.Username != exclude)
+                    names.Add(user.Username);
             }
 
             return names;
         }
 
-        public static void UpdatePassword(List<string> usersList, string admin)
+        public static void UpdatePassword(List<User> usersList, string admin)
         {
             var activeUsers = GetActiveUsernames(usersList, admin);
 
@@ -76,18 +74,16 @@ namespace FOP_Final_Proj
                 return;
             }
 
-            for (int i = 0; i < usersList.Count; i++)
+            foreach (var user in usersList)
             {
-                var parts = usersList[i].Split('|');
-
-                if (parts[0] == target)
-                    usersList[i] = $"{parts[0]}|{newPassword}|{parts[2]}|{parts[3]}";
+                if (user.Username == target)
+                    user.Password = newPassword;
             }
 
             Console.WriteLine("Password has been successfully updated.");
         }
 
-        public static void InactivateUser(List<string> usersList, string admin)
+        public static void InactivateUser(List<User> usersList, string admin)
         {
             var activeUsers = GetActiveUsernames(usersList, admin);
 
@@ -115,23 +111,20 @@ namespace FOP_Final_Proj
 
             var target = activeUsers[choice - 1];
 
-            for (int i = 0; i < usersList.Count; i++)
+            foreach (var user in usersList)
             {
-                var parts = usersList[i].Split('|');
-
-                if (parts[0] == target)
-                    usersList[i] = $"{parts[0]}|{parts[1]}|{parts[2]}|Inactive";
+                if (user.Username == target)
+                    user.Status = "Inactive";
             }
 
             Console.WriteLine($"{target} has been inactivated.");
         }
 
-        public static void AddUser(List<string> usersList)
+        public static void AddUser(List<User> usersList)
         {
             Console.Write("Enter role (1 Admin, 2 Warehouse, 3 User): ");
             var roleChoice = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
-
 
             string role;
 
@@ -154,7 +147,7 @@ namespace FOP_Final_Proj
 
             foreach (var user in usersList)
             {
-                if (user.Split('|')[0].ToLower() == username.ToLower())
+                if (user.Username.ToLower() == username.ToLower())
                 {
                     Console.WriteLine("Username already exists.");
                     return;
@@ -165,25 +158,25 @@ namespace FOP_Final_Proj
             var password = Console.ReadLine();
             Console.WriteLine();
 
-
-            usersList.Add($"{username}|{password}|{role}|Active");
+            usersList.Add(new User(username, password, role, "Active"));
 
             Console.WriteLine("User has been successfully created.");
         }
 
-        public static void DisplayUsers(List<string> usersList, string filter)
+        public static void DisplayUsers(List<User> usersList, string filter)
         {
             var found = false;
 
             foreach (var user in usersList)
             {
-                var parts = user.Split('|');
-
-                if (filter == "All" || filter == parts[3])
+                if (filter == "All" || filter == user.Status)
                 {
-                    Console.WriteLine($"Username: {parts[0]}");
-                    Console.WriteLine($"Role: {parts[2]}");
-                    Console.WriteLine($"Status: {parts[3]}");
+                    Console.WriteLine($"Username: {user.Username}");
+                    Console.WriteLine($"Role: {user.Role}");
+
+                    if (filter == "All")
+                        Console.WriteLine($"Status: {user.Status}");
+
                     Console.WriteLine();
                     found = true;
                 }

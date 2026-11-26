@@ -9,7 +9,7 @@ namespace FOP_Final_Proj
 {
     public static class ProductManager
     {
-        public static void AddProducts(List<string> productsList, string warehouse)
+        public static void AddProducts(List<Product> productsList, string warehouse)
         {
             int numProduct = 0;
             var isValid = false;
@@ -96,26 +96,24 @@ namespace FOP_Final_Proj
                     }
                 }
 
-                var date = DateTime.Now.ToString("M/d/yyyy h:mm tt");
-
-                productsList.Add($"{name}|{quantity}|True|{date}|{warehouse}");
+                productsList.Add(new Product(name, quantity, true, DateTime.Now, warehouse));
             }
 
             Console.WriteLine("All products have been successfully created.");
         }
 
-        public static bool ProductExists(List<string> productsList, string name)
+        public static bool ProductExists(List<Product> productsList, string name)
         {
             foreach (var product in productsList)
             {
-                if (product.Split('|')[0].ToLower() == name.ToLower())
+                if (product.Name.ToLower() == name.ToLower())
                     return true;
             }
 
             return false;
         }
 
-        public static void DisplayProducts(List<string> productsList)
+        public static void DisplayProducts(List<Product> productsList)
         {
             if (productsList.Count == 0)
             {
@@ -125,13 +123,11 @@ namespace FOP_Final_Proj
 
             foreach (var product in productsList)
             {
-                var parts = product.Split('|');
-
-                Console.WriteLine($"Product Name: {parts[0]}");
-                Console.WriteLine($"Quantity: {parts[1]}");
-                Console.WriteLine("Active : " + (parts[2] == "True" ? "Yes" : "No"));
-                Console.WriteLine($"Created Date: {parts[3]}");
-                Console.WriteLine($"Created By: {parts[4]}");
+                Console.WriteLine($"Product Name: {product.Name}");
+                Console.WriteLine($"Quantity: {product.Quantity}");
+                Console.WriteLine("Active : " + (product.IsActive ? "Yes" : "No"));
+                Console.WriteLine($"Created Date: {product.CreatedDate.ToString("M/d/yyyy h:mm tt")}");
+                Console.WriteLine($"Created By: {product.CreatedBy}");
                 Console.WriteLine();
             }
         }

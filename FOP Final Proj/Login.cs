@@ -10,7 +10,7 @@ namespace FOP_Final_Proj
     {
         const int MAX_ATTEMPTS = 3;
 
-        public static string Login(List<string> usersList, string role)
+        public static string Login(List<User> usersList, string role)
         {
             Console.WriteLine("(Enter 0 to go back)");
 
@@ -44,18 +44,16 @@ namespace FOP_Final_Proj
                     }
                 }
 
-               
+
                 foreach (var user in usersList)
                 {
-                    var parts = user.Split('|');
-
-                    if (parts[0].ToLower() == username.Trim().ToLower() &&
-                        parts[1] == password &&
-                        parts[2] == role &&
-                        parts[3] == "Active")
+                    if (user.Username.ToLower() == username.Trim().ToLower() &&
+                        user.Password == password &&
+                        user.Role == role &&
+                        user.Status == "Active")
                     {
                         Console.Clear();
-                        return parts[0];
+                        return user.Username;
                     }
                 }
 

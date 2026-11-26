@@ -14,9 +14,9 @@ namespace FOP_Final_Proj
     {
         static void Main(string[] args)
         {
-            List<string> usersList = new List<string>();
-            List<string> productsList = new List<string>();
-            List<string> ordersList = new List<string>();
+            List<User> usersList = new List<User>();
+            List<Product> productsList = new List<Product>();
+            List<Order> ordersList = new List<Order>();
 
             InitialData.GetInitialValues(usersList);
 

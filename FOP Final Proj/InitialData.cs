@@ -8,14 +8,14 @@ namespace FOP_Final_Proj
 {
     public static class InitialData
     {
-        public static void GetInitialValues(List<string> usersList)
+        public static void GetInitialValues(List<User> usersList)
         {
-            usersList.Add("yourname_admin|yourname_password|Admin|Active");
-            usersList.Add("jayson_warehouse|1234|Warehouse|Active");
-            usersList.Add("jenny_warehouse|1234|Warehouse|Active");
-            usersList.Add("jayson_user|1234|User|Active");
-            usersList.Add("jenny_user|1234|User|Active");
-            usersList.Add("mary_user|1234|User|Active");
+            usersList.Add(new User("admin", "1234", "Admin", "Active"));
+            usersList.Add(new User("warehouse", "1234", "Warehouse", "Active"));
+            usersList.Add(new User("jenny_warehouse", "1234", "Warehouse", "Active"));
+            usersList.Add(new User("user", "1234", "User", "Active"));
+            usersList.Add(new User("jenny_user", "1234", "User", "Active"));
+            usersList.Add(new User("mary_user", "1234", "User", "Active"));
         }
     }
 }

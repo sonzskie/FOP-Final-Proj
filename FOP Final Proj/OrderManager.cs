@@ -8,18 +8,18 @@ namespace FOP_Final_Proj
 {
     public static class OrderManager
     {
-        public static void PlaceOrder(List<string> productsList, List<string> ordersList, string username)
+        public static void PlaceOrder(List<Product> productsList, List<Order> ordersList, string username)
         {
             Console.WriteLine("0. Back");
 
             for (int i = 0; i < productsList.Count; i++)
             {
-                string[] details = productsList[i].Split('|');
+                Product item = productsList[i];
 
-                if (details[2] == "True")
+                if (item.IsActive)
                 {
-                    Console.WriteLine($"{i + 1}. Product Name: {details[0]}");
-                    Console.WriteLine($"Quantity: {details[1]}");
+                    Console.WriteLine($"{i + 1}. Product Name: {item.Name}");
+                    Console.WriteLine($"Quantity: {item.Quantity}");
                     Console.WriteLine();
                 }
             }
@@ -31,7 +31,7 @@ namespace FOP_Final_Proj
             switch (productChoice)
             {
                 case 0:
-                    return;  
+                    return;
                 default:
                     if (productChoice < 0)
                     {
@@ -47,9 +47,9 @@ namespace FOP_Final_Proj
                     break;
             }
 
-            string[] product = productsList[productChoice - 1].Split('|');
+            Product product = productsList[productChoice - 1];
 
-            if (product[2] != "True")
+            if (!product.IsActive)
             {
                 Console.WriteLine("Product is not available.");
                 return;
@@ -59,7 +59,7 @@ namespace FOP_Final_Proj
             int quantity = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine();
 
-            int availableQuantity = Convert.ToInt32(product[1]);
+            int availableQuantity = product.Quantity;
 
             if (quantity < 0)
             {
@@ -79,37 +79,31 @@ namespace FOP_Final_Proj
                 return;
             }
 
-            int remainingQuantity = availableQuantity - quantity;
+            product.Quantity = availableQuantity - quantity;
 
-            productsList[productChoice - 1] =
-                $"{product[0]}|{remainingQuantity}|{product[2]}|{product[3]}|{product[4]}";
-
-            ordersList.Add(
-                $"{username}|{product[0]}|{quantity}|{DateTime.Now:M/d/yyyy}");
+            ordersList.Add(new Order(username, product.Name, quantity, DateTime.Now));
 
             Console.WriteLine("\nOrder has been successfully created.");
 
             Console.WriteLine("\nOrder Details:");
-            Console.WriteLine($"Product Name: {product[0]}");
+            Console.WriteLine($"Product Name: {product.Name}");
             Console.WriteLine($"Quantity: {quantity}");
         }
 
-        public static void DisplayOrders(List<string> ordersList, string username)
+        public static void DisplayOrders(List<Order> ordersList, string username)
         {
             bool found = false;
 
             foreach (var order in ordersList)
             {
-                string[] details = order.Split('|');
-
-                if (username == "" || details[0] == username)
+                if (username == "" || order.Username == username)
                 {
-                    Console.WriteLine($"Product Name: {details[1]}");
-                    Console.WriteLine($"Quantity: {details[2]}");
-                    Console.WriteLine($"Order Date: {details[3]}");
+                    Console.WriteLine($"Product Name: {order.ProductName}");
+                    Console.WriteLine($"Quantity: {order.Quantity}");
+                    Console.WriteLine($"Order Date: {order.OrderDate:M/d/yyyy}");
 
                     if (username == "")
-                        Console.WriteLine($"Ordered By: {details[0]}");
+                        Console.WriteLine($"Ordered By: {order.Username}");
 
                     Console.WriteLine();
                     found = true;

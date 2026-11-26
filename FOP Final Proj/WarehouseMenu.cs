@@ -8,7 +8,7 @@ namespace FOP_Final_Proj
 {
     public static class WarehouseMenu
     {
-        public static void Show(List<string> usersList, List<string> productsList)
+        public static void Show(List<User> usersList, List<Product> productsList)
         {
             var warehouse = Authentication.Login(usersList, "Warehouse");
 
