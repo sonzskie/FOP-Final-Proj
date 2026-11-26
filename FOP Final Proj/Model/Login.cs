@@ -19,13 +19,13 @@ namespace FOP_Final_Proj
                 Console.Write("Please enter your username: ");
                 var username = Console.ReadLine();
 
-                if (username.Trim() == "0")
+                if (username == "0")
                     return "";
 
                 Console.Write("Please enter your password: ");
-                var password = Console.ReadLine().Trim();
+                var password = Console.ReadLine();
 
-                if (password.Trim() == "0")
+                if (password == "0")
                     return "";
 
                 if (int.TryParse(password, out int message))
@@ -47,7 +47,7 @@ namespace FOP_Final_Proj
 
                 foreach (var user in usersList)
                 {
-                    if (user.Username.ToLower() == username.Trim().ToLower() &&
+                    if (user.Username.ToLower() == username.ToLower() &&
                         user.Password == password &&
                         user.Role == role &&
                         user.Status == "Active")

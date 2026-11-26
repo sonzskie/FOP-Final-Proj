@@ -31,8 +31,7 @@ namespace FOP_Final_Proj
                 Console.WriteLine(message);
 
                 Console.WriteLine();
-                Console.Write("Please enter a number: ");
-                var userChoice = Convert.ToInt32(Console.ReadLine());
+                var userChoice = Input.ReadNumber("Please enter a number: ", 0, 3);
                 Console.WriteLine();
 
                 switch (userChoice)
@@ -48,9 +47,6 @@ namespace FOP_Final_Proj
                         break;
                     case 3:
                         UserMenu.Show(usersList, productsList, ordersList);
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input");
                         break;
                 }
             }

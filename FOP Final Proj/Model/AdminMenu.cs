@@ -31,8 +31,7 @@ namespace FOP_Final_Proj
                               "\n9. Logout");
 
                 Console.WriteLine();
-                Console.Write("Please enter a number: ");
-                var userChoice = Convert.ToInt32(Console.ReadLine());
+                var userChoice = Input.ReadNumber("Please enter a number: ", 1, 9);
                 Console.WriteLine();
 
                 switch (userChoice)
@@ -67,9 +66,6 @@ namespace FOP_Final_Proj
                         Console.ReadKey();
                         Console.Clear();
                         keepRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input");
                         break;
                 }
             }

@@ -31,25 +31,15 @@ namespace FOP_Final_Proj
                 Console.WriteLine($"{i + 2}. {activeUsers[i]}");
             }
 
-            Console.Write("Please select an account: ");
-            int choice;
-
-            if (!int.TryParse(Console.ReadLine(), out choice))
-                choice = -1;   // spaces or letters count as an invalid choice
+            int choice = Input.ReadNumber("Please select an account: ", 1, activeUsers.Count + 1);
             Console.WriteLine();
-
 
             string target;
 
             if (choice == 1)
                 target = admin;
-            else if (choice >= 2 && choice <= activeUsers.Count + 1)
-                target = activeUsers[choice - 2];
             else
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }
+                target = activeUsers[choice - 2];
 
             string newPassword;
 
@@ -98,16 +88,8 @@ namespace FOP_Final_Proj
                 Console.WriteLine($"{i + 1}. {activeUsers[i]}");
             }
 
-            Console.Write("Please select a user to inactivate: ");
-            var choice = Convert.ToInt32(Console.ReadLine());
+            int choice = Input.ReadNumber("Please select a user to inactivate: ", 1, activeUsers.Count);
             Console.WriteLine();
-
-
-            if (choice < 1 || choice > activeUsers.Count)
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }
 
             var target = activeUsers[choice - 1];
 
@@ -122,8 +104,7 @@ namespace FOP_Final_Proj
 
         public static void AddUser(List<User> usersList)
         {
-            Console.Write("Enter role (1 Admin, 2 Warehouse, 3 User): ");
-            var roleChoice = Convert.ToInt32(Console.ReadLine());
+            int roleChoice = Input.ReadNumber("Enter role (1 Admin, 2 Warehouse, 3 User): ", 1, 3);
             Console.WriteLine();
 
             string role;
@@ -132,13 +113,8 @@ namespace FOP_Final_Proj
                 role = "Admin";
             else if (roleChoice == 2)
                 role = "Warehouse";
-            else if (roleChoice == 3)
-                role = "User";
             else
-            {
-                Console.WriteLine("Invalid input");
-                return;
-            }
+                role = "User";
 
             Console.Write("Enter username: ");
             var username = Console.ReadLine().Trim();

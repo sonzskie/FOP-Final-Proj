@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace FOP_Final_Proj
 {
-    public static class WarehouseMenu
+    public static class UserMenu
     {
-        public static void Show(List<User> usersList, List<Product> productsList)
+        public static void Show(List<User> usersList, List<Product> productsList, List<Order> ordersList)
         {
-            var warehouse = Authentication.Login(usersList, "Warehouse");
+            var username = Authentication.Login(usersList, "User");
 
-            if (warehouse == "")
+            if (username == "")
                 return;
 
             var keepRunning = true;
@@ -20,24 +20,23 @@ namespace FOP_Final_Proj
             while (keepRunning)
             {
                 var message = "\nPlease select an option:" +
-                              "\n1. Add Products" +
-                              "\n2. Display Products" +
+                              "\n1. Order" +
+                              "\n2. Display Order" +
                               "\n3. Logout";
 
                 Console.WriteLine(message);
 
                 Console.WriteLine();
-                Console.Write("Please enter a number: ");
-                var userChoice = Convert.ToInt32(Console.ReadLine());
+                var userChoice = Input.ReadNumber("Please enter a number: ", 1, 3);
                 Console.WriteLine();
 
                 switch (userChoice)
                 {
                     case 1:
-                        ProductManager.AddProducts(productsList, warehouse);
+                        OrderManager.PlaceOrder(productsList, ordersList, username);
                         break;
                     case 2:
-                        ProductManager.DisplayProducts(productsList);
+                        OrderManager.DisplayOrders(ordersList, username);
                         break;
                     case 3:
                         Console.WriteLine("Successfully logged out.");
@@ -45,9 +44,6 @@ namespace FOP_Final_Proj
                         Console.ReadKey();
                         Console.Clear();
                         keepRunning = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid input");
                         break;
                 }
             }
